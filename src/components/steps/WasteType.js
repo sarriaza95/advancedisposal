@@ -48,24 +48,35 @@ export default function WasteType() {
           Waste Type
         </div>
         <div className="my-2 flex rounded border border-gray-200 bg-white p-1">
-          <select 
-          onChange={e => store.setWasteTypeSelect(e.target.value)}
-          name="waste"
-          placeholder="Select a Waste Type"
-          className="w-full appearance-none p-1 px-2 text-gray-800 outline-none"
-          >
-            <option value="">Select a WasteType</option>
-            {!loading
-          ? data?.wasteTypes?.nodes?.map((x, y) => {
-              return (
-                <option key={y} value={x.customFieldsWasteType.name}>
-                  {x.customFieldsWasteType.name}
-
-                </option>
-              );
-            })
-          : null}
-          </select>
+        { !store.WasteTypeSelect ? (
+              <select 
+              onChange={e => store.setWasteTypeSelect(e.target.value)}
+              name="waste"
+              placeholder="Select a Waste Type"
+              className="w-full appearance-none p-1 px-2 text-gray-800 outline-none"
+              >
+                <option value="">Select a WasteType</option>
+                {!loading
+              ? data?.wasteTypes?.nodes?.map((x, y) => {
+                  return (
+                    <option key={y} value={x.customFieldsWasteType.name}>
+                      {x.customFieldsWasteType.name}
+    
+                    </option>
+                  );
+                })
+              : null}
+              </select>
+          ) : (
+            <input
+          required 
+          defaultValue={store.WasteTypeSelect}
+          disabled ="true"
+          className="w-full appearance-none p-1 px-2 text-gray-800 outline-none opacity-50"
+        />
+          )
+          }
+          
         </div>
       </div>
       {btnDisable()}

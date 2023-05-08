@@ -47,28 +47,38 @@ export default function DumspterSize() {
       {NumberStep ()}
       <div className="mx-2 w-full flex-1">
         <div className="mt-3 h-6 text-xs font-bold uppercase leading-8 text-gray-500">
-          Waste Type
+          Dumpster Type
         </div>
         <div className="my-2 flex rounded border border-gray-200 bg-white p-1">
-          
-        <select 
-          onChange={e => store.setDumspterSelect(e.target.value)}
-          name="waste"
-          placeholder="Select a Dumpster Size"
-          className="w-full appearance-none p-1 px-2 text-gray-800 outline-none"
-          >
-            <option>Select a Dumspter Size</option>
-            {!loading
-          ? data?.dumpsterSizes?.nodes?.map((x, y) => {
-              return (
-                <option key={y} value={x.customFieldsdumpsterSize.name}>
-                  {x.customFieldsdumpsterSize.name}
-
-                </option>
-              );
-            })
-          : null}
-          </select>
+        { !store.DumspterSelect ? (
+              <select 
+              onChange={e => store.setDumspterSelect(e.target.value)}
+              name="waste"
+              placeholder="Select a Dumpster Size"
+              className="w-full appearance-none p-1 px-2 text-gray-800 outline-none"
+              >
+                <option>Select a Dumspter Size</option>
+                {!loading
+              ? data?.dumpsterSizes?.nodes?.map((x, y) => {
+                  return (
+                    <option key={y} value={x.customFieldsdumpsterSize.name}>
+                      {x.customFieldsdumpsterSize.name}
+    
+                    </option>
+                  );
+                })
+              : null}
+              </select>
+          ) : (
+            <input
+          required 
+          defaultValue={store.DumspterSelect}
+          disabled ="true"
+          className="w-full appearance-none p-1 px-2 text-gray-800 outline-none opacity-50"
+        />
+          )
+          }
+        
         </div>
       </div>
       {btnDisable()}

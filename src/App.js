@@ -26,6 +26,7 @@ function App () {
   const [DumspterSelect, setDumspterSelect] = useState("");
   const [btnActive, setbtnActive] = useState(true);
   const [stepNumber, setstepNumber] = useState(1);
+  const [zoneSelect, setzoneSelect] = useState(1);
   const steps =[
     "Address",
     "Waste Type",
@@ -101,7 +102,9 @@ function App () {
           btnActive,
           setbtnActive,
           stepNumber,
-          setstepNumber
+          setstepNumber,
+          zoneSelect,
+          setzoneSelect
         }}>
           {displayStep(currentStep)}
         </StepperContext.Provider>

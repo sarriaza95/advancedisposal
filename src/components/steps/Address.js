@@ -62,13 +62,16 @@ const zips = [
   "95690",
   "95691",
   "95693",
+  "95741",
   "95742",
   "95747",
   "95746",
   "95757",
   "95758",
+  "95759",
   "95762",
   "95765",
+  "95799",
 ];
 
 export default function Address() {
@@ -147,17 +150,28 @@ export default function Address() {
           Address
         </div>
         <div className="my-2 rounded border border-gray-200 bg-white p-1">
-        <MapboxAutocomplete
-            publicKey="pk.eyJ1IjoidGZtbWFwIiwiYSI6ImNrczgyam9tMzI4angybm80ajl4Mjlpdm0ifQ.Dii91WO-ju0Ed3HjCI6c7Q"
-            onSuggestionSelect={(result, lat, lng, text, postcode) =>
-              
-              setAddres(result, postcode)
-            }
-            country="US"
-            placeholder="Please Enter your address..."
-            defaultValue = "7140 Tokay Avenue, Sacramento, California 95828, United States"
-            className="my-2 flex rounded border border-gray-200 bg-white p-1"
-          />
+          { !store.AddressSelect ? (
+              <MapboxAutocomplete
+              publicKey="pk.eyJ1IjoidGZtbWFwIiwiYSI6ImNrczgyam9tMzI4angybm80ajl4Mjlpdm0ifQ.Dii91WO-ju0Ed3HjCI6c7Q"
+              onSuggestionSelect={(result, lat, lng, text, postcode) =>
+                
+                setAddres(result, postcode)
+              }
+              country="US"
+              placeholder="Please Enter your address..."
+              defaultValue = "7140 Tokay Avenue, Sacramento, California 95828, United States"
+              className="my-2 flex rounded border border-gray-200 bg-white p-1"
+            />
+          ) : (
+            <input
+          required 
+          defaultValue={store.AddressSelect}
+          disabled ="true"
+          className="w-full appearance-none p-1 px-2 text-gray-800 outline-none opacity-50"
+        />
+          )
+          }
+        
           {!isValidAddress ? (
             <div role="alert">
               <div className="bg-red-500 text-white font-bold rounded-t px-4 py-2">
@@ -211,6 +225,7 @@ export default function Address() {
         <div className="my-2 flex rounded border border-gray-200 bg-white p-1">
           <input
             required 
+            defaultValue={store.EmailAddress}
             onChange={(e) => store.setEmailAddress(e.target.value)}
             name="email"
             placeholder="Email Address"
@@ -226,6 +241,7 @@ export default function Address() {
         <div className="my-2 flex rounded border border-gray-200 bg-white p-1">
           <input
             required 
+            defaultValue={store.PhoneNumber}
             onChange={(e) => store.setPhoneNumber(e.target.value)}
             name="phone"
             placeholder="Phone Number"
