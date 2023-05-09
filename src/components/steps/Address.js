@@ -1,5 +1,4 @@
 import {useState, useContext} from 'react'
-import { StepperContext } from '../../context/StepperContext'
 import { Store } from '../../App';
 import MapboxAutocomplete from "react-mapbox-autocomplete";
 
@@ -75,7 +74,7 @@ const zips = [
 ];
 
 export default function Address() {
-  const store = useContext(StepperContext);
+  const store = useContext(Store);
   const [isValidAddress, setIsValidAddress] = useState(true);
   const [isValidZip, setIsValidZip] = useState(true);
   const [success, setSuccess] = useState(false);
@@ -137,7 +136,7 @@ export default function Address() {
     }
   }
 
-  const {userData, setUserData} = useContext(StepperContext);
+  const {userData, setUserData} = useContext(Store);
   const handleChange = (e) =>{
     const {name, value} = e.target;
     setUserData({...userData,[name]: value});

@@ -15,7 +15,7 @@ function App () {
 
   const [currentStep, setCurrentStep] = useState(1);
   const [userData, setUserData] = useState('');
-  const [AddressSelect, setAddressSelect] = useState("");
+  const [AddressSelect, setAddressSelect] = useState(null);
   const [ZipCode, setZipcode] = useState("");
   const [FullName, setFullName] = useState("");
   const [EmailAddress, setEmailAddress] = useState("");
@@ -26,7 +26,9 @@ function App () {
   const [DumspterSelect, setDumspterSelect] = useState("");
   const [btnActive, setbtnActive] = useState(true);
   const [stepNumber, setstepNumber] = useState(1);
-  const [zoneSelect, setzoneSelect] = useState(1);
+  const [zoneSelected, setzoneSelected] = useState("");
+  const [priceSelect, setpriceSelect] = useState(1);
+  console.log(priceSelect)
   const steps =[
     "Address",
     "Waste Type",
@@ -55,9 +57,6 @@ function App () {
     //
     newStep > 0 && newStep <= steps.length && setCurrentStep(newStep);
   }
-  console.log(ZipCode)
-  console.log("antes del disable")
-  console.log (WasteTypeSelect)
   /*const btnDisable = () =>{
     if(AddressSelect && FullName && EmailAddress && PhoneNumber){
       console.log("entra")
@@ -68,6 +67,36 @@ function App () {
     }
   }*/
   return (
+    <Store.Provider value={{
+      userData,
+      setUserData,
+      AddressSelect,
+      setAddressSelect,
+      setFullName,
+      FullName,
+      setEmailAddress,
+      EmailAddress,
+      setPhoneNumber,
+      PhoneNumber,
+      ZipCode,
+      setZipcode,
+      finalData,
+      serFinalData,
+      WasteTypeDatas,
+      setWasteTypeDatas,
+      WasteTypeSelect,
+      setWasteTypeSelect,
+      DumspterSelect,
+      setDumspterSelect,
+      btnActive,
+      setbtnActive,
+      stepNumber,
+      setstepNumber,
+      zoneSelected,
+      setzoneSelected,
+      priceSelect,
+      setpriceSelect
+    }}>
     <div className='App shadow-xl rounded-2xl pb-2 bg-white'>
       {/*Stepper */}
       <div className='container horizontal mt-5'>
@@ -78,36 +107,9 @@ function App () {
       </div>
       {/*Display Components */}
       <div className='my-10 p-10'>
-        <StepperContext.Provider value={{
-          userData,
-          setUserData,
-          AddressSelect,
-          setAddressSelect,
-          setFullName,
-          FullName,
-          setEmailAddress,
-          EmailAddress,
-          setPhoneNumber,
-          PhoneNumber,
-          ZipCode,
-          setZipcode,
-          finalData,
-          serFinalData,
-          WasteTypeDatas,
-          setWasteTypeDatas,
-          WasteTypeSelect,
-          setWasteTypeSelect,
-          DumspterSelect,
-          setDumspterSelect,
-          btnActive,
-          setbtnActive,
-          stepNumber,
-          setstepNumber,
-          zoneSelect,
-          setzoneSelect
-        }}>
+        
           {displayStep(currentStep)}
-        </StepperContext.Provider>
+        
       </div>
       {/*Navigation Controls */}
       {currentStep != steps.length && 
@@ -119,7 +121,7 @@ function App () {
         />
       }
     </div>
-    
+    </Store.Provider>
     
   )
 }

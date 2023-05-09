@@ -1,7 +1,6 @@
-import React from 'react'
-import {useContext} from 'react'
-import { StepperContext } from '../../context/StepperContext';
-import { gql, useQuery } from '@apollo/client';
+import React, {useContext} from 'react'
+import { Store } from '../../App';
+import { gql, useLazyQuery, useQuery } from '@apollo/client';
 
 const zips = [
   {"zipcode": "95811", "zone": "1"},
@@ -76,50 +75,15 @@ const ZONEPRICES = gql `
 {
   zonesPrices {
     nodes {
-      zonePrice (filters:{zone:{eq:$zone}}){
+      zonePrice {
         idZone
         dumpsterSize {
-          price10Yards {
-            description
-            fieldGroupName
-            size
-            types {
-              fieldGroupName
-              priceCardboard
-              priceMetal
-              priceRoofing
-              priceTrash
-              priceWood
-            }
-          }
-          price10Rock {
-            types {
-              fieldGroupName
-              priceCleanConcrete
-              priceCleanDirt
-              priceContaminatedConcrete
-              priceContaminatedDirt
-            }
-          }
-          price20Yards {
-            types {
-              fieldGroupName
-              priceCardboard
-              priceMetal
-              priceRoofing
-              priceTrash
-              priceWood
-            }
-          }
-          price40Yards {
-            types {
-              fieldGroupName
-              priceCardboard
-              priceMetal
-              priceRoofing
-              priceTrash
-              priceWood
-            }
+          description
+          name
+          size
+          types {
+            name
+            price
           }
         }
         
@@ -131,21 +95,189 @@ const ZONEPRICES = gql `
 `
 
 export default function Confirm() {
-  const store = useContext(StepperContext);
-  const {loading, data, error} = useQuery(ZONEPRICES,{
-    variables: {zone: store.zoneSelect}});
+  const store = useContext(Store);
+  
+  const {loading, data, error} = useQuery(ZONEPRICES);
   const send_info = (zipcode) => {
-    console.log(data)
-    console.log(zips)
-    const found = zips.find(obj => {
-      return obj.zipcode === zipcode;
+    const found = zips.find((obj) => obj.zipcode === zipcode);
+    store.setzoneSelected(found.zone)
+    const found2 = data?.zonesPrices?.nodes?.find(obj => {
+      return obj.zonePrice.idZone === found.zone;
       
     });
-    store.setzoneSelect(found.zone)
+    const dumspterSizeSelect = store.DumspterSelect
+    if(dumspterSizeSelect === "10 Yard Trash"){
+      const found3 = found2?.zonePrice?.dumpsterSize?.map((x,y) =>{
+        if(x.name === "10 yards"){
+          console.log(x.name)
+          const wasteTypeSelected = store.WasteTypeSelect
+          if(wasteTypeSelected === "Trash"){
+            x?.types?.map((x,y)=>{
+              if(x.name === "Trash or C&D"){
+                store.setpriceSelect(x.price)
+              }
+            })
+          }
+          if(wasteTypeSelected === "Roofing"){
+            x?.types?.map((x,y)=>{
+              if(x.name === "Roofing"){
+                store.setpriceSelect(x.price)
+              }
+            })
+          }
+          if(wasteTypeSelected === "Wood"){
+            x?.types?.map((x,y)=>{
+              if(x.name === "Wood or Green Waste"){
+                store.setpriceSelect(x.price)
+              }
+            })
+          }
+          if(wasteTypeSelected === "Cardboard"){
+            x?.types?.map((x,y)=>{
+              if(x.name === "Cardboard"){
+                store.setpriceSelect(x.price)
+              }
+            })
+          }
+          if(wasteTypeSelected === "Metal"){
+            x?.types?.map((x,y)=>{
+              if(x.name === "Metal"){
+                store.setpriceSelect(x.price)
+              }
+            })
+          }
+        }
+        
+      })
+    }
+    if(dumspterSizeSelect === "20 Yard Trash"){
+      console.log("entro a 20")
+      const found3 = found2?.zonePrice?.dumpsterSize?.map((x,y) =>{
+        if(x.name === "20 yards"){
+          console.log(x.name)
+          const wasteTypeSelected = store.WasteTypeSelect
+          if(wasteTypeSelected === "Trash"){
+            x?.types?.map((x,y)=>{
+              if(x.name === "Trash or C&D"){
+                store.setpriceSelect(x.price)
+              }
+            })
+          }
+          if(wasteTypeSelected === "Roofing"){
+            x?.types?.map((x,y)=>{
+              if(x.name === "Roofing"){
+                store.setpriceSelect(x.price)
+              }
+            })
+          }
+          if(wasteTypeSelected === "Wood"){
+            x?.types?.map((x,y)=>{
+              if(x.name === "Wood or Green Waste"){
+                store.setpriceSelect(x.price)
+              }
+            })
+          }
+          if(wasteTypeSelected === "Cardboard"){
+            x?.types?.map((x,y)=>{
+              if(x.name === "Cardboard"){
+                store.setpriceSelect(x.price)
+              }
+            })
+          }
+          if(wasteTypeSelected === "Metal"){
+            x?.types?.map((x,y)=>{
+              if(x.name === "Metal"){
+                store.setpriceSelect(x.price)
+              }
+            })
+          }
+        }
+        
+      })
+    }
+    if(dumspterSizeSelect === "40 Yard Trash"){
+      const found3 = found2?.zonePrice?.dumpsterSize?.map((x,y) =>{
+        if(x.name === "40 Yards"){
+          console.log(x.name)
+          const wasteTypeSelected = store.WasteTypeSelect
+          if(wasteTypeSelected === "Trash"){
+            x?.types?.map((x,y)=>{
+              if(x.name === "Trash or C&D"){
+                store.setpriceSelect(x.price)
+              }
+            })
+          }
+          if(wasteTypeSelected === "Roofing"){
+            x?.types?.map((x,y)=>{
+              if(x.name === "Roofing"){
+                store.setpriceSelect(x.price)
+              }
+            })
+          }
+          if(wasteTypeSelected === "Wood"){
+            x?.types?.map((x,y)=>{
+              if(x.name === "Wood or Green Waste"){
+                store.setpriceSelect(x.price)
+              }
+            })
+          }
+          if(wasteTypeSelected === "Cardboard"){
+            x?.types?.map((x,y)=>{
+              if(x.name === "Cardboard"){
+                store.setpriceSelect(x.price)
+              }
+            })
+          }
+          if(wasteTypeSelected === "Metal"){
+            x?.types?.map((x,y)=>{
+              if(x.name === "Metal"){
+                store.setpriceSelect(x.price)
+              }
+            })
+          }
+        }
+        
+      })
+    }
+    if(dumspterSizeSelect === "10 Yard Rock"){
+      const found3 = found2?.zonePrice?.dumpsterSize?.map((x,y) =>{
+        if(x.name === "10 Rock"){
+          console.log(x.name)
+          const wasteTypeSelected = store.WasteTypeSelect
+          if(wasteTypeSelected === "Contaminated Concrete"){
+            x?.types?.map((x,y)=>{
+              if(x.name === "Contaminated Concrete"){
+                store.setpriceSelect(x.price)
+              }
+            })
+          }
+          if(wasteTypeSelected === "Contaminated Dirt"){
+            x?.types?.map((x,y)=>{
+              if(x.name === "Contaminated Dirt"){
+                store.setpriceSelect(x.price)
+              }
+            })
+          }
+          if(wasteTypeSelected === "Clean Dirt"){
+            x?.types?.map((x,y)=>{
+              if(x.name === "Clean Dirt"){
+                store.setpriceSelect(x.price)
+              }
+            })
+          }
+          if(wasteTypeSelected === "Clean Concrete"){
+            x?.types?.map((x,y)=>{
+              if(x.name === "Clean Concrete"){
+                store.setpriceSelect(x.price)
+              }
+            })
+          }
+        }
+        
+      })
+    }
     
   }
-  
-  
   return (
     <div className="container md:mt-10">
       <div className="flex flex-col items-center">

@@ -1,8 +1,7 @@
 import React from 'react'
 
 const StepperControl = ({handleClick, currentStep, steps, disable}) => {
-  console.log("perra")
-  console.log(disable)
+  
     return (
         <div className="container mt-4 mb-8 flex justify-around">
           <button

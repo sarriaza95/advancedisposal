@@ -1,6 +1,6 @@
 import {useContext} from 'react'
-import { StepperContext } from '../../context/StepperContext';
 import { gql, useQuery } from "@apollo/client";
+import { Store } from '../../App';
 
 const WASTETYPE = gql`
   {
@@ -18,14 +18,14 @@ const WASTETYPE = gql`
 export default function WasteType() {
 
   const { loading, data } = useQuery(WASTETYPE);
-  const store = useContext(StepperContext);
+  const store = useContext(Store);
 
   const NumberStep = () => {
     store.setstepNumber(2);
     store.setbtnActive(true)
   }
 
-  const {userData, setUserData} = useContext(StepperContext);
+  const {userData, setUserData} = useContext(Store);
   const handleChange = (e) =>{
     const {name, value} = e.target;
     setUserData({...userData,[name]: value});

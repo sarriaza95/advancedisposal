@@ -1,6 +1,6 @@
 import {useContext} from 'react'
-import { StepperContext } from '../../context/StepperContext';
 import { gql, useQuery } from "@apollo/client";
+import { Store } from '../../App';
 
 const DUMPTERS = gql`
   {
@@ -19,14 +19,14 @@ const DUMPTERS = gql`
 export default function DumspterSize() {
 
   const { loading, data } = useQuery(DUMPTERS);
-  const store = useContext(StepperContext);
+  const store = useContext(Store);
 
   const NumberStep = () => {
     store.setstepNumber(3);
     store.setbtnActive(true)
   }
 
-  const {userData, setUserData} = useContext(StepperContext);
+  const {userData, setUserData} = useContext(Store);
   const handleChange = (e) =>{
     const {name, value} = e.target;
     setUserData({...userData,[name]: value});
