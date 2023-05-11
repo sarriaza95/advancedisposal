@@ -1,6 +1,7 @@
 import React, {useContext, useState} from 'react'
 import { Store } from '../../App';
 import { gql, useLazyQuery, useQuery } from '@apollo/client';
+import Text from '../Form/Form';
 
 const zips = [
   {"zipcode": "95811", "zone": "1"},
@@ -98,7 +99,7 @@ export default function Confirm() {
   const store = useContext(Store);
   
   const {loading, data, error} = useQuery(ZONEPRICES);
-  const [isNoService, setisNoService] = useState(true);
+  const [Send, setSend] = useState(false);
   const send_info = (zipcode) => {
     const found = zips.find((obj) => obj.zipcode === zipcode);
     store.setzoneSelected(found.zone)
@@ -117,6 +118,7 @@ export default function Confirm() {
             x?.types?.map((x,y)=>{
               if(x.name === "Trash or C&D"){
                 store.setpriceSelect(x.price)
+                setSend(true)
               }
             })
           }
@@ -124,6 +126,7 @@ export default function Confirm() {
             x?.types?.map((x,y)=>{
               if(x.name === "Roofing"){
                 store.setpriceSelect(x.price)
+                setSend(true)
               }
             })
           }
@@ -131,6 +134,7 @@ export default function Confirm() {
             x?.types?.map((x,y)=>{
               if(x.name === "Wood or Green Waste"){
                 store.setpriceSelect(x.price)
+                setSend(true)
               }
             })
           }
@@ -138,6 +142,7 @@ export default function Confirm() {
             x?.types?.map((x,y)=>{
               if(x.name === "Cardboard"){
                 store.setpriceSelect(x.price)
+                setSend(true)
               }
             })
           }
@@ -145,6 +150,7 @@ export default function Confirm() {
             x?.types?.map((x,y)=>{
               if(x.name === "Metal"){
                 store.setpriceSelect(x.price)
+                setSend(true)
               }
             })
           }
@@ -162,6 +168,7 @@ export default function Confirm() {
             x?.types?.map((x,y)=>{
               if(x.name === "Trash or C&D"){
                 store.setpriceSelect(x.price)
+                setSend(true)
               }
             })
           }
@@ -169,6 +176,7 @@ export default function Confirm() {
             x?.types?.map((x,y)=>{
               if(x.name === "Roofing"){
                 store.setpriceSelect(x.price)
+                setSend(true)
               }
             })
           }
@@ -176,6 +184,7 @@ export default function Confirm() {
             x?.types?.map((x,y)=>{
               if(x.name === "Wood or Green Waste"){
                 store.setpriceSelect(x.price)
+                setSend(true)
               }
             })
           }
@@ -183,6 +192,7 @@ export default function Confirm() {
             x?.types?.map((x,y)=>{
               if(x.name === "Cardboard"){
                 store.setpriceSelect(x.price)
+                setSend(true)
               }
             })
           }
@@ -190,6 +200,7 @@ export default function Confirm() {
             x?.types?.map((x,y)=>{
               if(x.name === "Metal"){
                 store.setpriceSelect(x.price)
+                setSend(true)
               }
             })
           }
@@ -206,6 +217,7 @@ export default function Confirm() {
             x?.types?.map((x,y)=>{
               if(x.name === "Trash or C&D"){
                 store.setpriceSelect(x.price)
+                setSend(true)
               }
             })
           }
@@ -213,6 +225,7 @@ export default function Confirm() {
             x?.types?.map((x,y)=>{
               if(x.name === "Roofing"){
                 store.setpriceSelect(x.price)
+                setSend(true)
               }
             })
           }
@@ -220,6 +233,7 @@ export default function Confirm() {
             x?.types?.map((x,y)=>{
               if(x.name === "Wood or Green Waste"){
                 store.setpriceSelect(x.price)
+                setSend(true)
               }
             })
           }
@@ -227,6 +241,7 @@ export default function Confirm() {
             x?.types?.map((x,y)=>{
               if(x.name === "Cardboard"){
                 store.setpriceSelect(x.price)
+                setSend(true)
               }
             })
           }
@@ -234,6 +249,7 @@ export default function Confirm() {
             x?.types?.map((x,y)=>{
               if(x.name === "Metal"){
                 store.setpriceSelect(x.price)
+                setSend(true)
               }
             })
           }
@@ -250,6 +266,7 @@ export default function Confirm() {
             x?.types?.map((x,y)=>{
               if(x.name === "Contaminated Concrete"){
                 store.setpriceSelect(x.price)
+                setSend(true)
               }
             })
           }
@@ -257,6 +274,7 @@ export default function Confirm() {
             x?.types?.map((x,y)=>{
               if(x.name === "Contaminated Dirt"){
                 store.setpriceSelect(x.price)
+                setSend(true)
               }
             })
           }
@@ -264,6 +282,7 @@ export default function Confirm() {
             x?.types?.map((x,y)=>{
               if(x.name === "Clean Dirt"){
                 store.setpriceSelect(x.price)
+                setSend(true)
               }
             })
           }
@@ -271,6 +290,7 @@ export default function Confirm() {
             x?.types?.map((x,y)=>{
               if(x.name === "Clean Concrete"){
                 store.setpriceSelect(x.price)
+                setSend(true)
               }
             })
           }
@@ -387,6 +407,9 @@ export default function Confirm() {
             Confirm
           </button>
         </a>
+        {Send ? (
+          <Text />
+        ) : null}
       </div>
     </div>
   )

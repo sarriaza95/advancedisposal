@@ -74,9 +74,9 @@ import {
             </View>
             <View>
               <Text style={styles.text}>Name: {props.store.FullName}</Text>
-              <Text style={styles.text}>Phone: {props.store.Phone}</Text>
-              <Text style={styles.text}>Email: {props.store.Email}</Text>
-              <Text style={styles.text}>{props.store.Address}</Text>
+              <Text style={styles.text}>Phone: {props.store.PhoneNumber}</Text>
+              <Text style={styles.text}>Email: {props.store.EmailAddress}</Text>
+              <Text style={styles.text}>{props.store.AddressSelect}</Text>
             </View>
           </View>
   
@@ -94,7 +94,7 @@ import {
               <Text style={styles.textBold}>Dumpster Size: </Text>
             </View>
             <View style={styles.fifty}>
-              <Text style={styles.textInfo}>{props.store.DumpsterSize}</Text>
+              <Text style={styles.textInfo}>{props.store.DumspterSelect}</Text>
             </View>
           </View>
           
@@ -103,7 +103,7 @@ import {
               <Text style={styles.textBold}>Waste Type: </Text>
             </View>
             <View style={styles.fifty}>
-              <Text style={styles.textInfo}>{props.store.WasteType}</Text>
+              <Text style={styles.textInfo}>{props.store.WasteTypeSelect}</Text>
             </View>
           </View>
           
@@ -117,7 +117,7 @@ import {
               <Text style={styles.textPrice}>Total: </Text>
             </View>
             <View style={styles.fifty}>
-              <Text style={styles.textTotal}>${props.store.Price}</Text>
+              <Text style={styles.textTotal}>${props.store.priceSelect}</Text>
             </View>
           </View>
             </View>
