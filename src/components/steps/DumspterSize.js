@@ -10,6 +10,9 @@ const DUMPTERS = gql`
           name
           price
           unit
+          categorie {
+            name
+          }
         }
       }
     }
@@ -41,7 +44,6 @@ export default function DumspterSize() {
       store.setbtnActive(true)
     }
   }
-
   return (
     <div className='flex flex-col'>
       {NumberStep ()}
@@ -50,34 +52,51 @@ export default function DumspterSize() {
           Dumpster Type
         </div>
         <div className="my-2 flex rounded border border-gray-200 bg-white p-1">
-        { !store.DumspterSelect ? (
-              <select 
+        <select 
               onChange={e => store.setDumspterSelect(e.target.value)}
               name="waste"
+              value={store.DumspterSelect}
               placeholder="Select a Dumpster Size"
               className="w-full appearance-none p-1 px-2 text-gray-800 outline-none"
               >
                 <option>Select a Dumspter Size</option>
-                {!loading
+                
+                { 
+                
+                !loading
               ? data?.dumpsterSizes?.nodes?.map((x, y) => {
-                  return (
-                    <option key={y} value={x.customFieldsdumpsterSize.name}>
-                      {x.customFieldsdumpsterSize.name}
-    
-                    </option>
-                  );
+                if (store.WasteTypeSelect === "Trash" || store.WasteTypeSelect === "Roofing" || store.WasteTypeSelect === "Wood" || store.WasteTypeSelect === "Cardboard" || store.WasteTypeSelect === "Metal"){
+                  console.log("entra en found")
+                  console.log("entra en map")
+                    console.log (x.customFieldsdumpsterSize.name)
+                    if(x.customFieldsdumpsterSize.name === "10 Yard Trash" || x.customFieldsdumpsterSize.name === "20 Yard Trash" || x.customFieldsdumpsterSize.name === "40 Yard Trash"){
+                      console.log("entra en primer if")
+                      return (
+                        <option key={y} value={x.customFieldsdumpsterSize.name}>
+                          {x.customFieldsdumpsterSize.name}
+        
+                        </option>
+                      );
+                    }
+                }
+                if (store.WasteTypeSelect === "Contaminated Concrete" || store.WasteTypeSelect === "Contaminated Dirt" || store.WasteTypeSelect === "Clean Dirt" || store.WasteTypeSelect === "Clean Concrete"){
+                  console.log("entra en found2")
+                  console.log("entra en map")
+                    console.log (x.customFieldsdumpsterSize.name)
+                    if(x.customFieldsdumpsterSize.name === "10 Yard Rock"){
+                      console.log("entra en primer if2")
+                      return (
+                        <option key={y} value={x.customFieldsdumpsterSize.name}>
+                          {x.customFieldsdumpsterSize.name}
+        
+                        </option>
+                      );
+                    }
+                }
+                  
                 })
               : null}
               </select>
-          ) : (
-            <input
-          required 
-          defaultValue={store.DumspterSelect}
-          disabled ="true"
-          className="w-full appearance-none p-1 px-2 text-gray-800 outline-none opacity-50"
-        />
-          )
-          }
         
         </div>
       </div>

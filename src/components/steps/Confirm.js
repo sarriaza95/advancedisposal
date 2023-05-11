@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React, {useContext, useState} from 'react'
 import { Store } from '../../App';
 import { gql, useLazyQuery, useQuery } from '@apollo/client';
 
@@ -98,9 +98,11 @@ export default function Confirm() {
   const store = useContext(Store);
   
   const {loading, data, error} = useQuery(ZONEPRICES);
+  const [isNoService, setisNoService] = useState(true);
   const send_info = (zipcode) => {
     const found = zips.find((obj) => obj.zipcode === zipcode);
     store.setzoneSelected(found.zone)
+    
     const found2 = data?.zonesPrices?.nodes?.find(obj => {
       return obj.zonePrice.idZone === found.zone;
       

@@ -48,10 +48,10 @@ export default function WasteType() {
           Waste Type
         </div>
         <div className="my-2 flex rounded border border-gray-200 bg-white p-1">
-        { !store.WasteTypeSelect ? (
-              <select 
+        <select 
               onChange={e => store.setWasteTypeSelect(e.target.value)}
               name="waste"
+              value={store.WasteTypeSelect}
               placeholder="Select a Waste Type"
               className="w-full appearance-none p-1 px-2 text-gray-800 outline-none"
               >
@@ -67,15 +67,6 @@ export default function WasteType() {
                 })
               : null}
               </select>
-          ) : (
-            <input
-          required 
-          defaultValue={store.WasteTypeSelect}
-          disabled ="true"
-          className="w-full appearance-none p-1 px-2 text-gray-800 outline-none opacity-50"
-        />
-          )
-          }
           
         </div>
       </div>
